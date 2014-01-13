@@ -13,5 +13,6 @@ class User < ActiveRecord::Base
 	#magic?
 	has_secure_password
 
+	#min password length
 	validates :password, length: { minimum: 4 }
 end
