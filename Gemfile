@@ -48,4 +48,6 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'rails_12factor', group: :production
+group :production do
+      gem 'rails_12factor'
+    end
