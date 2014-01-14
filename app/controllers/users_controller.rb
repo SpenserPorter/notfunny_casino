@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def create #Process user signup
   	@user = User.new(user_params)
   		if @user.save
+  			flash[:success] = "Now you can give us all your money!"
   			redirect_to @user
   		else
   			render 'new' #kickback to form if save fails

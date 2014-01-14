@@ -7,16 +7,18 @@
 		<%= form_for(@user) do |f| %>
 			<%= render 'shared/error_messages' %>
 
-			<%= f.label :name %> 
-			<%= f.text_field :name %>
+			<%= f.label :name %> <br />
+			<%= f.text_field :name %> <br />
 
-			<%= f.label :email %> 
-			<%= f.text_field :email %>
+			<%= f.label :email %> <br />
+			<%= f.text_field :email %> <br />
+		
 
-			<%= f.label :password, "Password, min 4 chars" %> 
-			<%= f.password_field :password %> 
-			<%= f.label :password_confirmation, "Confirm password" %>k
-			<%= f.password_field :password_confirmation %>
+			<%= f.label :password, "Password, min 4 chars" %> <br /> 
+			<%= f.password_field :password %> <br />
+
+			<%= f.label :password_confirmation, "Confirm password" %> <br />
+			<%= f.password_field :password_confirmation %> 
 
 			<%= f.submit "Create account" %>
 		<% end %>
