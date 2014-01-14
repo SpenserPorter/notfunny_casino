@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 	#downcase email before saving
 	before_save { self.email = email.downcase }
+	before_create :create_remember_token
 
 	#validate entries for existence, name for max length, and proper formatting on email address
 	validates :name, presence: true, length: { maximum: 25 }
@@ -14,4 +15,18 @@ class User < ActiveRecord::Base
 
 	#min password length
 	validates :password, length: {minimum: 4}
+
+	def User.new_remember_token
+		SecureRandom.urlsafe_base64
+	end
+
+	def User.encrypt(token)
+		Digest::SHA1.hexdigest(token.to_s)
+	end
+
+	private
+
+		def create_remember_token
+			self.remember_token = User.encrypt(User.new_remember_token)
+		end
 end

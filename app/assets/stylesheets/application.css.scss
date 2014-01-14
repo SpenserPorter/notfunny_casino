@@ -29,6 +29,17 @@ $grayMediumLight: #eaeaea;
   text-decoration: none;
 }
 
+header ul {
+  float: right;
+  list-style: none;
+}
+
+header ul li {
+  float: left;
+  margin-left: 10px;
+}
+
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
