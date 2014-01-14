@@ -6,9 +6,6 @@ gem 'rails', '4.0.2'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
-#I don't know what this does, needed for heroku or something?
-gem 'rails_12factor'
-
 # Use bcrypt for hasing user passwords
 gem "bcrypt-ruby", "~> 3.1.2"
 
@@ -51,3 +48,4 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'rails_12factor', group: :production
