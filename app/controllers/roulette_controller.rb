@@ -1,8 +1,9 @@
 class RouletteController < ApplicationController
 
+	before_action :signed_in_user
+
 	def index
 		@user = current_user
-		@balance = current_balance
 	end
 
 	def get
@@ -10,21 +11,20 @@ class RouletteController < ApplicationController
 	end
 
 	def create
-	 @balance = current_balance
 	 @user = current_user
 
-	 	if params[:wager].to_i <= @balance.balance
+	 	if params[:wager].to_i <= @user.balance.balance && params[:bet].to_i != 0
 
-			spin = rand(2)
+			spin = rand(2) + 1
 
 			if params[:bet].to_i == spin
 				flash[:success] = "You win #{params[:wager]}"
-				newbalance =  @balance.balance + params[:wager].to_i
-				@balance.update_attribute(:balance, newbalance)
+				newbalance =  @user.balance.balance + params[:wager].to_i
+				@user.balance.update_attribute(:balance, newbalance)
 			else
 				flash[:error] = "You lose #{params[:wager]}"
-				newbalance = @balance.balance - params[:wager].to_i
-				@balance.update_attribute(:balance, newbalance)
+				newbalance = @user.balance.balance - params[:wager].to_i
+				@user.balance.update_attribute(:balance, newbalance)
 			end
 			redirect_to :back
 		else
@@ -33,6 +33,11 @@ class RouletteController < ApplicationController
 		end
 	end
 
+private
+	def signed_in_user
+		redirect_to signin_url, notice: "Please sign in." unless signed_in?
+	end
+	
 	
 end
 

@@ -3,10 +3,10 @@ Welcome to the table, <%= @user.name %>
 	
 		<%= form_tag("/roulette", method: "post") do %>
 		
-			<%= radio_button_tag(:bet, "0") %>
+			<%= radio_button_tag(:bet, "1") %>
 			<%= label_tag(:bet_red, "Bet red") %> <br />
 
-			<%= radio_button_tag(:bet, "1") %>
+			<%= radio_button_tag(:bet, "2") %>
 			<%= label_tag(:bet_black, "Bet black") %> <br />
 
 			<%= label_tag(:wager, "wager") %>
@@ -21,7 +21,25 @@ Welcome to the table, <%= @user.name %>
 		<br / >
 
 		<%= @out %>
-		Your balance is currently <%= @balance.balance %>
+		Your balance is currently <%= @user.balance.balance %>
+
+	<div>
+
+		Current High Scores:
+
+		<ol>
+			<% highscores = Balance.order("balance DESC").limit(5).to_a %>
+
+			<% highscores.each do |f| %>
+
+			<li><%= "#{User.find_by(id: f.user.id).name}'s balance is #{f.balance}" %></li>
+
+			<% end %>
+
+		</ol>
+
+
+	</div>
 
 	
 		

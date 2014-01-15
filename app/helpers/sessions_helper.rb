@@ -26,9 +26,8 @@ module SessionsHelper
 		self.current_user = nil
 	end
 
-	def current_balance
-		@user = current_user
-		@balance = Balance.find_by(user_id: @user.id)
-	end
+
+
+
 
 end

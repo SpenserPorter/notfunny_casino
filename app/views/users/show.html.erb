@@ -6,6 +6,10 @@ Name:<%= @user.name %> <br />
 Email:<%= @user.email %> <br />
 
 
-<%= current_balance.balance %>
+Your account balance is: <%= @user.balance.balance %> <br />
+
+Play the only game we have? <%= link_to "Roulette", roulette_index_path %>
+
+
 
 
