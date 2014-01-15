@@ -1,1 +1,31 @@
 <h2> Roulette page </h2>
+Welcome to the table, <%= @user.name %>
+	
+		<%= form_tag("/roulette", method: "post") do %>
+		
+			<%= radio_button_tag(:bet, "0") %>
+			<%= label_tag(:bet_red, "Bet red") %> <br />
+
+			<%= radio_button_tag(:bet, "1") %>
+			<%= label_tag(:bet_black, "Bet black") %> <br />
+
+			<%= label_tag(:wager, "wager") %>
+			<%= text_field_tag (:wager) %> <br />
+
+			<%= submit_tag("Spin!") %>
+
+			<% end %>
+
+		</form>
+
+		<br / >
+
+		<%= @out %>
+		Your balance is currently <%= @balance.balance %>
+
+	
+		
+
+		
+	
+

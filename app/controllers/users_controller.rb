@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def create #Process user signup
   	@user = User.new(user_params)
   		if @user.save
+        @balance = Balance.create(user_id: @user.id, balance: 1000)
         sign_in @user
   			flash[:success] = "Now you can give us all your money!"
   			redirect_to @user
@@ -22,8 +23,8 @@ class UsersController < ApplicationController
 
 	private
 
- 	def user_params #set which paams are required, which are permitted for safety
- 		params.require(:user).permit(:name, :email, :password, :password_confirmation)
+ 	def user_params #set which params are required, which are permitted for safety
+ 		params.require(:user).permit( :name, :email, :password, :password_confirmation )
  	end 
 
 end
