@@ -14,7 +14,7 @@ before_action :signed_in_user
 	def create
 	 @user = current_user
 
-		 if params[:bets].nil? == false && params[:wager].to_i != 0 && params[:wager].to_i <= @user.balance.balance
+		 if params[:bets].nil? == false && params[:wager].to_i != 0 && params[:wager].to_i * params[:bets].count <= @user.balance.balance
 		 #debt the balance the total wager, 
 		 #which is the number in the wager box times the number of unique wagers
 
@@ -68,7 +68,7 @@ before_action :signed_in_user
 				redirect_to :back
 
 		else
-			flash[:success] = "You didn't bet anything!"
+			flash[:success] = "That is not a valid bet!!"
 			redirect_to :back
 		end
 

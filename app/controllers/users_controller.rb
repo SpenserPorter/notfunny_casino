@@ -4,6 +4,12 @@ class UsersController < ApplicationController
   	@user = User.new
   end
 
+  def refresh_balance
+    @user.balance.update_attribute(:balance, 1000)
+    redirect_to @user
+  end
+
+
   def create #Process user signup
   	@user = User.new(user_params)
   		if @user.save
@@ -18,7 +24,11 @@ class UsersController < ApplicationController
  
 	def show #User Profile page
   	@user = User.find(params[:id])
-  end
+
+      if @user.balance.balance == 0
+         refresh_balance
+      end
+   end
 
 
 	private
