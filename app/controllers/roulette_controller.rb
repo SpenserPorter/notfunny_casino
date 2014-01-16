@@ -14,11 +14,15 @@ before_action :signed_in_user
 	def create
 	 @user = current_user
 
-		 if params[:bets].nil? == false && params[:wager].to_i != 0 && params[:wager].to_i * params[:bets].count <= @user.balance.balance
+	 	
+	 		@bets = params[:bets].reject(&:blank?)
+
+
+		 if params[:bets].nil? == false && params[:wager].to_i != 0 && params[:wager].to_i * @bets.count <= @user.balance.balance
 		 #debt the balance the total wager, 
 		 #which is the number in the wager box times the number of unique wagers
 
-		 debtwager = @user.balance.balance - (params[:wager].to_i * params[:bets].count)
+		 debtwager = @user.balance.balance - (params[:wager].to_i * @bets.count)
 		 @user.balance.update_attribute(:balance, debtwager)
 
 
@@ -27,7 +31,7 @@ before_action :signed_in_user
 		 @payout = 0
 		 spin = rand(36)+1
 
-		 params[:bets].each do |f|
+		 @bets.each do |f|
 
 		 	if f == "red"
 		 		allbets = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]
@@ -43,7 +47,7 @@ before_action :signed_in_user
 
 		 	elsif f == "1st_12"
 		 		allbets = [1,2,3,4,5,6,7,8,9,10,11,12]
-
+.compact
 		 	elsif f == "2nd_12"
 		 		allbets = [13,14,15,16,17,18,19,20,21,22,23,24]
 
@@ -67,7 +71,7 @@ before_action :signed_in_user
 				addwinnings = @user.balance.balance + @payout
 				@user.balance.update_attribute(:balance, addwinnings)
 
-				flash[:success] = "Result:#{spin} You wagered #{params[:wager].to_i * params[:bets].count}, and won #{@payout.to_i}. "
+				flash[:success] = "You bet #{params[:wager]} on #{@bets.to_sentence}. Result:[#{spin}] Total wagered #{params[:wager].to_i * @bets.count}, total won #{@payout.to_i}. "
 				redirect_to :back
 
 		else
