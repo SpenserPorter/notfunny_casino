@@ -25,7 +25,7 @@ before_action :signed_in_user
 		 #parse :bets param array into array of numbers according to roulette table layout
 		 allbets = []
 		 @payout = 0
-		 spin = 23
+		 spin = rand(36)+1
 
 		 params[:bets].each do |f|
 
