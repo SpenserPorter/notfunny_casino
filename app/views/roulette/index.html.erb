@@ -1,3 +1,4 @@
+<div>
 <h1> Roulette page </h1>
 <h3>Welcome to the table, <%= @user.name %></h3>
 ======================================================================================
@@ -34,8 +35,14 @@
 	</div>
 
 	<div class = "colum" style = "float:left">
-				<%= label_tag(:wager, "wager") %>
-				<%= number_field_tag(:wager, "wager", in: 1...@user.balance.balance+1 ) %> <br />
+				
+				<%= label_tag('straight_up', "Straight up:") %>
+				<%= number_field_tag('bets[]', "straightup", in: 1...37) %>
+	</div>
+
+	<div class = "colum" style = "float:left">
+				<%= label_tag(:wager, "Wager/unit:") %>
+				<%= number_field_tag(:wager, "wager", in: 1...@user.balance.balance+1) %> <br />
 	</div>
 
 	<div class = "colum" style = "float:left">
@@ -61,6 +68,7 @@
 
 		</ol>
 	</div>
+</div>
 </div>
 
 

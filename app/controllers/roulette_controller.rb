@@ -25,7 +25,7 @@ before_action :signed_in_user
 		 #parse :bets param array into array of numbers according to roulette table layout
 		 allbets = []
 		 @payout = 0
-		 spin = rand(36) + 1
+		 spin = 23
 
 		 params[:bets].each do |f|
 
@@ -49,6 +49,9 @@ before_action :signed_in_user
 
 		 	elsif f == "3rd_12"
 		 		allbets = [25,26,27,28,29,30,31,32,33,34,35,36]
+
+		 	else
+		 		allbets = [f.to_i]
 		 	end
 
 		 	@payout += allbets.select{|x| x == spin}.count  *  params[:wager].to_i * 36 / allbets.count.to_f
