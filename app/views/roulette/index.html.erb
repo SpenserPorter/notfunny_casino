@@ -1,28 +1,56 @@
-<h2> Roulette page </h2>
-Welcome to the table, <%= @user.name %>
-	
-		<%= form_tag("/roulette", method: "post") do %>
+<h1> Roulette page </h1>
+<h3>Welcome to the table, <%= @user.name %></h3>
+======================================================================================
+
+<div class ="columns" >
+	<div class = "colum" style = "float:left">
 		
-			<%= radio_button_tag(:bet, "1") %>
-			<%= label_tag(:bet_red, "Bet red") %> <br />
+	
+			<%= form_tag("/roulette", method: "post") do %>
+			
+				<%= check_box_tag('bets[]', "red") %>
+				<%= label_tag(:bet_red, "Bet RED") %> <br />
 
-			<%= radio_button_tag(:bet, "2") %>
-			<%= label_tag(:bet_black, "Bet black") %> <br />
+				<%= check_box_tag('bets[]', "black") %>
+				<%= label_tag(:bet_black, "Bet BLACK") %> <br />
 
-			<%= label_tag(:wager, "wager") %>
-			<%= text_field_tag (:wager) %> <br />
+				<%= check_box_tag('bets[]', "even") %>
+				<%= label_tag(:bet_even, "Bet EVEN") %> <br />
 
-			<%= submit_tag("Spin!") %>
+				<%= check_box_tag('bets[]', "odd") %>
+				<%= label_tag(:bet_odd, "Bet ODD") %> <br />
 
-			<% end %>
+	</div>
+	<div class = "colum" style = "float:left">
 
-		</form>
+				<%= check_box_tag('bets[]', "1st_12") %>
+				<%= label_tag(:bet_1st12, "Bet 1st 12") %> <br />
 
-		<br / >
+				<%= check_box_tag('bets[]', "2nd_12") %>
+				<%= label_tag(:bet_2nd12, "Bet 2nd 12") %> <br />
+
+				<%= check_box_tag('bets[]', "3rd_12") %>
+				<%= label_tag(:bet_3rd12, "Bet 3rd 12") %> <br />
+
+
+	</div>
+
+				<%= label_tag(:wager, "wager") %>
+				<%= number_field_tag(:wager, "wager", in: 1...@user.balance.balance+1 ) %> <br />
+
+				<%= submit_tag("Spin!") %>
+
+				<% end %>
+
+			</form>
+</div>
+	
+
+
 
 		<%= @out %>
 		Your balance is currently <%= @user.balance.balance %>
-
+	</div>	
 	<div>
 
 		Current High Scores:
@@ -32,7 +60,7 @@ Welcome to the table, <%= @user.name %>
 
 			<% highscores.each do |f| %>
 
-			<li><%= "#{User.find_by(id: f.user.id).name}'s balance is #{f.balance}" %></li>
+			<li><%= "#{User.find_by(id: f.user.id).name}s balance is #{f.balance}" %></li>
 
 			<% end %>
 
@@ -41,7 +69,8 @@ Welcome to the table, <%= @user.name %>
 
 	</div>
 
-	
+</div>
+
 		
 
 		
