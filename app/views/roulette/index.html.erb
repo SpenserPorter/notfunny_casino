@@ -31,28 +31,24 @@
 
 				<%= check_box_tag('bets[]', "3rd_12") %>
 				<%= label_tag(:bet_3rd12, "Bet 3rd 12") %> <br />
-
-
 	</div>
 
+	<div class = "colum" style = "float:left">
 				<%= label_tag(:wager, "wager") %>
 				<%= number_field_tag(:wager, "wager", in: 1...@user.balance.balance+1 ) %> <br />
+	</div>
 
+	<div class = "colum" style = "float:left">
 				<%= submit_tag("Spin!") %>
-
-				<% end %>
-
+			<% end %>
+	</div>
 			</form>
-</div>
+
+	<div class = "colum" style = "float:left">
+	|  Your balance is currently <%= @user.balance.balance %>
 	
-
-
-
-		<%= @out %>
-		Your balance is currently <%= @user.balance.balance %>
-	</div>	
-	<div>
-
+	</div>
+<div class = "colum" style = "float:right">
 		Current High Scores:
 
 		<ol>
@@ -66,7 +62,7 @@
 
 		</ol>
 
-
+</div>
 	</div>
 
 </div>
