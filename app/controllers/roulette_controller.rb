@@ -55,7 +55,7 @@ before_action :signed_in_user
 		 		#determine outcome, calculate amount won
 				spin = rand(36) + 1
 
-				@payout = allbets.select{|x| x == spin}.count  *  params[:wager].to_i * params[:bets].count * 36**2 / allbets.count.to_f**2
+				@payout = allbets.select{|x| x == spin}.count  *  params[:wager].to_i * params[:bets].count * 36**params[:bets].count / allbets.count.to_f**params[:bets].count
 
 				addwinnings = @user.balance.balance + @payout
 				@user.balance.update_attribute(:balance, addwinnings)
